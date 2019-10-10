@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.bson.Document;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 
@@ -28,7 +29,9 @@ public class Selecionar {
 		MongoDatabase database = conexao.getDatabase();
 
 		List<Empresa> empresas = new LinkedList<Empresa>();
-		FindIterable<Document> find = database.getCollection("empresa").find(new Document("_id", empresa.getCnpj()));
+		BasicDBObject whereQuery = new BasicDBObject();
+		whereQuery.append("_id", empresa.getCnpj());
+		FindIterable<Document> find = database.getCollection("empresa").find(whereQuery);
 		List<Funcionario> funcionarioEmpresa = new LinkedList<Funcionario>();
 
 		for (Document empre : find) {
