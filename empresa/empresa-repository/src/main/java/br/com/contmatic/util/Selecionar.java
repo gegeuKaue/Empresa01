@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.bson.Document;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
@@ -44,6 +46,7 @@ public class Selecionar {
 			for (Document endereco : empre.getList("enderecos", Document.class)) {
 				Endereco end = new Endereco();
 				end.setCep(endereco.getString("cep"));
+				end.setNumero(endereco.getInteger("numero"));
 				Document cidade = endereco.get("cidade", Document.class);
 				Cidade cid = new Cidade();
 				cid.setNome(cidade.getString("nome"));
@@ -59,6 +62,7 @@ public class Selecionar {
 				end.setCidade(cid);
 				enderecos.add(end);
 			}
+			
 			empresa.setEnderecos(enderecos);
 
 			for (Document funcio : empre.getList("funcionarios", Document.class)) {
@@ -67,6 +71,14 @@ public class Selecionar {
 				funcionario.setEmail(funcio.getString("email"));
 				funcionario.setCpf(funcio.getString("cpf"));
 				funcionario.setIdade(funcio.getInteger("idade"));
+
+				funcionario.setEntrada(LocalTime.parse(funcio.getString("entrada")));
+				funcionario.setSaida(LocalTime.parse(funcio.getString("saida")));
+				funcionario.setDataContratacao(LocalDate.parse(funcio.getString("dataContratacao")));
+				
+				// funcionario.setDataContratacao(new
+				// LocalDate(funcio.getDate("entrada").toString()));
+				funcionario.setCargo(funcio.getString("cargo"));
 				Set<Telefone> telefones = new HashSet<Telefone>();
 
 				for (Document telefone : funcio.getList("telefones", Document.class)) {
@@ -88,7 +100,7 @@ public class Selecionar {
 
 	public static void main(String[] args) throws IOException {
 		Empresa empresa = new Empresa();
-		empresa.setCnpj("61516268071277");
+		empresa.setCnpj("54581050332999");
 		System.out.print(new Selecionar().selecionar(empresa));
 		System.out.print(new Selecionar().selecionar(empresa));
 	}
