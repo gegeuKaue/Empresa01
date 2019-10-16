@@ -115,7 +115,7 @@ public class Funcionario {
 	 *
 	 * @return the idade
 	 */
-	public int getIdade() {
+	public Integer getIdade() {
 		return idade;
 	}
 
@@ -124,7 +124,7 @@ public class Funcionario {
 	 *
 	 * @param idade the new idade
 	 */
-	public void setIdade(int idade) {
+	public void setIdade(Integer idade) {
 		this.idade = idade;
 	}
 

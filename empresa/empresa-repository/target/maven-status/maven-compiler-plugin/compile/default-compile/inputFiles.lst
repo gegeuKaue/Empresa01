@@ -1,5 +1,9 @@
-U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\util\Selecionar.java
 U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\util\Conexao.java
-U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\util\Salvar.java
-U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\util\Deletar.java
-U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\util\Alterar.java
+U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\assembly\Assembly.java
+U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\assembly\BairroResourceAssembly.java
+U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\assembly\EmpresaResourceAssembly.java
+U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\repository\Repository.java
+U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\assembly\EnderecoResourceAssembly.java
+U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\assembly\TelefoneResourceAssembly.java
+U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\assembly\CidadeResourceAssembly.java
+U:\git\repositoryEmpresa01\empresa\empresa-repository\src\main\java\br\com\contmatic\assembly\FuncionarioResourceAssembly.java
