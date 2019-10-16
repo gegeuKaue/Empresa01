@@ -14,6 +14,7 @@ public class EnderecoResourceAssembly implements Assembly<Endereco, Document> {
 			resource.setCep(document.getString("cep"));
 			resource.setNumero(document.getInteger("numero"));
 			resource.setCidade(toResourceCidade((Document) document.get("cidade")));
+			return resource;
 		}
 		return null;
 	}
@@ -31,6 +32,6 @@ public class EnderecoResourceAssembly implements Assembly<Endereco, Document> {
 			return null;
 		}
 		CidadeResourceAssembly cidadeResource = new CidadeResourceAssembly();
-		return cidadeResource.toResource((Document) document.get("cidade"));
+		return cidadeResource.toResource(document);
 	}
 }

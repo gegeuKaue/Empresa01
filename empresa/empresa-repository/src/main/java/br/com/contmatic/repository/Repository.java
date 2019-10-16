@@ -4,7 +4,6 @@ import static com.mongodb.client.model.Projections.include;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
@@ -80,7 +79,7 @@ public class Repository {
 		Conexao conexao = Conexao.getInstance();
 		Repository repository = new Repository(conexao.getDatabase());
 
-		List<Empresa> empresas = repository.selecionar(Arrays.asList("nome", "email", "funcionarios"));
+		Empresa empresas = repository.selecionar("88673767029538");
 		System.out.println(empresas);
 		conexao.close();
 	}

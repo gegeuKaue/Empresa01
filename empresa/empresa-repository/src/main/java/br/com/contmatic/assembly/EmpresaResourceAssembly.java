@@ -21,8 +21,8 @@ public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 			resource.setEmail(document.getString("email"));
 			resource.setUrl(document.getString("url"));
 			resource.setCnpj(document.getString("_id"));
-			resource.setEnderecos(toResourceEnderecos(document.getList("enderecos", Document.class)));
 			resource.setFuncionarios(toResourceFuncionarios(document.getList("funcionarios", Document.class)));
+			resource.setEnderecos(toResourceEnderecos(document.getList("enderecos", Document.class)));
 			return resource;
 		}
 		return null;
@@ -37,6 +37,7 @@ public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 	}
 
 	private Set<Endereco> toResourceEnderecos(List<Document> documents) {
+		
 		if (documents == null) {
 			return null;
 		}

@@ -13,6 +13,7 @@ public class CidadeResourceAssembly implements Assembly<Cidade, Document> {
 			Cidade resource = new Cidade();
 			resource.setNome(document.getString("nome"));
 			resource.setEstado(Estado.valueOf(((Document) document.get("estado")).getString("name")));
+			return resource;
 		}
 		return null;
 	}
