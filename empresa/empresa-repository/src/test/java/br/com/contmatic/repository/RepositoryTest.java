@@ -1,10 +1,16 @@
 package br.com.contmatic.repository;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.bson.Document;
 import org.junit.After;
@@ -115,5 +121,95 @@ public class RepositoryTest {
 		Empresa empresaBuscada = repository.selecionar(empresa.getCnpj());
 
 		assertTrue("Deve armazenar uma empresa no banco", empresaBuscada != null);
+	}
+
+	@Test
+	public void deve_selecionar_pelo_cnpj_uma_empresa_no_banco_e_retornar_campos_iguais_como_salvou()
+			throws IOException {
+		Repository repository = new Repository(database);
+
+		Empresa empresa = EmpresaEasyRandom.empresa();
+		repository.salvar(empresa);
+
+		Empresa empresaBuscada = repository.selecionar(empresa.getCnpj());
+		assertTrue(empresaBuscada.toString().equals(empresa.toString()));
+	}
+
+	@Test
+	public void deve_selecionar_pelo_cnpj_uma_empresa_e_nao_deve_ter_valores_nulo() throws IOException {
+		Repository repository = new Repository(database);
+
+		Empresa empresa = EmpresaEasyRandom.empresa();
+		repository.salvar(empresa);
+
+		Empresa empresaBuscada = repository.selecionar(empresa.getCnpj());
+		assertThat(empresaBuscada.toString(), not(containsString("null")));
+	}
+
+	@Test
+	public void deve_retornar_nulo_quando_manda_uma_lista_nula() throws IOException {
+		Repository repository = new Repository(database);
+
+		Empresa empresa = EmpresaEasyRandom.empresa();
+		repository.salvar(empresa);
+
+		List<Empresa> empresaBuscada = repository.selecionar((List<String>) null);
+		assertNull(empresaBuscada);
+	}
+
+	@Test
+	public void deve_retornar_nulo_quando_manda_uma_lista_vazia() throws IOException {
+		Repository repository = new Repository(database);
+
+		Empresa empresa = EmpresaEasyRandom.empresa();
+		repository.salvar(empresa);
+
+		List<Empresa> empresaBuscada = repository.selecionar(new ArrayList<String>());
+		assertNull(empresaBuscada);
+	}
+
+	@Test
+	public void deve_retornar_campo_nome_da_empresa() throws IOException {
+		Repository repository = new Repository(database);
+
+		Empresa empresa = EmpresaEasyRandom.empresa();
+		repository.salvar(empresa);
+
+		Empresa empresaBuscada = repository.selecionar(Arrays.asList("nome")).get(0);
+		assertThat(empresaBuscada.toString(), containsString("\"nome\":\"" + empresa.getNome() + "\""));
+
+	}
+
+	@Test
+	public void deve_retornar_campo_nulos_da_empresa_ao_selecionar_escolhendo_campo() throws IOException {
+		Repository repository = new Repository(database);
+
+		Empresa empresa = EmpresaEasyRandom.empresa();
+		repository.salvar(empresa);
+
+		Empresa empresaBuscada = repository.selecionar(Arrays.asList("nome", "email")).get(0);
+		assertThat(empresaBuscada.toString(), containsString("null"));
+	}
+	
+	@Test
+	public void deve_retornar_campo_da_empresa_mesmo_caso_nao_exista_ao_selecionar_escolhendo_campo() throws IOException {
+		Repository repository = new Repository(database);
+
+		Empresa empresa = EmpresaEasyRandom.empresa();
+		repository.salvar(empresa);
+
+		Empresa empresaBuscada = repository.selecionar(Arrays.asList("nome", "email","aaaaaaaaaaaaaaaaaaaaaaaaaaaa")).get(0);
+		assertThat(empresaBuscada.toString(), containsString("null"));
+	}
+	@Test
+	public void deve_retornar_campo_da_empresa_mesmo_caso_nao_esssssssssxista_ao_selecionar_escolhendo_campo() throws IOException {
+		Repository repository = new Repository(database);
+
+		Empresa empresa = EmpresaEasyRandom.empresa();
+		repository.salvar(empresa);
+
+		Empresa empresaBuscada = repository.selecionar(Arrays.asList("aaaaaaaaaaaaaaaaaaaaaaaaaaaa")).get(0);
+		System.out.println(empresa);
+		assertThat(empresaBuscada.toString(), containsString("null"));
 	}
 }

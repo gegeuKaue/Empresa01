@@ -14,7 +14,6 @@ import com.mongodb.client.MongoDatabase;
 
 import br.com.contmatic.assembly.EmpresaResourceAssembly;
 import br.com.contmatic.empresa.Empresa;
-import br.com.contmatic.util.Conexao;
 
 public class Repository {
 	private MongoDatabase database;
@@ -61,11 +60,14 @@ public class Repository {
 	}
 
 	public List<Empresa> selecionar(List<String> campos) throws IOException {
+		if (campos == null) {
+			return null;
+		}
 		if (campos.isEmpty()) {
 			return null;
 		}
 
-		FindIterable<Document> find = database.getCollection("empresa").find().projection(include(campos)).limit(2);
+		FindIterable<Document> find = database.getCollection("empresa").find().projection(include(campos)).limit(50);
 		List<Empresa> empresas = new ArrayList<Empresa>();
 		EmpresaResourceAssembly empresaResourceAssembly = new EmpresaResourceAssembly();
 		for (Document document : find) {
@@ -74,13 +76,4 @@ public class Repository {
 		return empresas;
 	}
 
-	public static void main(String[] args) throws IOException {
-
-		Conexao conexao = Conexao.getInstance();
-		Repository repository = new Repository(conexao.getDatabase());
-
-		Empresa empresas = repository.selecionar("88673767029538");
-		System.out.println(empresas);
-		conexao.close();
-	}
 }

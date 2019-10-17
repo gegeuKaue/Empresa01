@@ -10,6 +10,7 @@ import org.bson.Document;
 import br.com.contmatic.empresa.Empresa;
 import br.com.contmatic.empresa.Funcionario;
 import br.com.contmatic.endereco.Endereco;
+import br.com.contmatic.telefone.Telefone;
 
 public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 
@@ -17,12 +18,13 @@ public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 	public Empresa toResource(Document document) {
 		if (document != null) {
 			Empresa resource = new Empresa();
+			resource.setCnpj(document.getString("_id"));
 			resource.setNome(document.getString("nome"));
 			resource.setEmail(document.getString("email"));
 			resource.setUrl(document.getString("url"));
-			resource.setCnpj(document.getString("_id"));
 			resource.setFuncionarios(toResourceFuncionarios(document.getList("funcionarios", Document.class)));
 			resource.setEnderecos(toResourceEnderecos(document.getList("enderecos", Document.class)));
+			resource.setTelefones(toResourceTelefones(document.getList("telefones", Document.class)));
 			return resource;
 		}
 		return null;
@@ -37,7 +39,7 @@ public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 	}
 
 	private Set<Endereco> toResourceEnderecos(List<Document> documents) {
-		
+
 		if (documents == null) {
 			return null;
 		}
@@ -60,4 +62,18 @@ public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 		}
 		return resources;
 	}
+
+	private Set<Telefone> toResourceTelefones(List<Document> documents) {
+		if (documents == null) {
+			return null;
+		}
+		TelefoneResourceAssembly assembly = new  TelefoneResourceAssembly();
+		Set<Telefone> telefones = new HashSet<Telefone>();
+		for (Document document : documents) {
+			telefones.add(assembly.toResource(document));
+		}
+		
+		return telefones;
+	}
+
 }
