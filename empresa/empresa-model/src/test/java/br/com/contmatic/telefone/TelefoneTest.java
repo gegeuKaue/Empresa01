@@ -21,6 +21,8 @@ import org.junit.Test;
 import com.google.code.beanmatchers.BeanMatchers;
 
 import br.com.contmatic.fixture.FixtureFuncionario;
+import br.com.contmatic.groups.Post;
+import br.com.contmatic.groups.Put;
 import br.com.six2six.fixturefactory.Fixture;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
@@ -138,8 +140,13 @@ public class TelefoneTest {
 	public boolean isValid(Telefone telefone, String mensagem) {
 		validator = factory.getValidator();
 		boolean valido = true;
-		Set<ConstraintViolation<Telefone>> restricoes = validator.validate(telefone);
+		Set<ConstraintViolation<Telefone>> restricoes = validator.validate(telefone, Post.class);
 		for (ConstraintViolation<Telefone> constraintViolation : restricoes)
+			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
+				valido = false;
+
+		Set<ConstraintViolation<Telefone>> restricoes2 = validator.validate(telefone, Put.class);
+		for (ConstraintViolation<Telefone> constraintViolation : restricoes2)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
 		return valido;

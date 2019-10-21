@@ -11,8 +11,17 @@ import org.joda.time.LocalTime;
 import br.com.contmatic.empresa.Funcionario;
 import br.com.contmatic.telefone.Telefone;
 
+/**
+ * The Class FuncionarioResourceAssembly.
+ */
 public class FuncionarioResourceAssembly implements Assembly<Funcionario, Document> {
 
+	/**
+	 * To resource.
+	 *
+	 * @param document the document
+	 * @return the funcionario
+	 */
 	@Override
 	public Funcionario toResource(Document document) {
 		if (document != null) {
@@ -31,6 +40,12 @@ public class FuncionarioResourceAssembly implements Assembly<Funcionario, Docume
 		return null;
 	}
 
+	/**
+	 * To document.
+	 *
+	 * @param resource the resource
+	 * @return the document
+	 */
 	@Override
 	public Document toDocument(Funcionario resource) {
 		if (resource != null) {
@@ -39,6 +54,12 @@ public class FuncionarioResourceAssembly implements Assembly<Funcionario, Docume
 		return null;
 	}
 
+	/**
+	 * To resource funcionarios.
+	 *
+	 * @param documents the documents
+	 * @return the sets the
+	 */
 	private Set<Telefone> toResourceFuncionarios(List<Document> documents) {
 		if (documents == null) {
 			return null;
@@ -50,10 +71,22 @@ public class FuncionarioResourceAssembly implements Assembly<Funcionario, Docume
 		return telefones;
 	}
 
+	/**
+	 * Local time.
+	 *
+	 * @param time the time
+	 * @return the local time
+	 */
 	private LocalTime localTime(String time) {
 		return time == null ? null : LocalTime.parse(time);
 	}
 
+	/**
+	 * Local date.
+	 *
+	 * @param data the data
+	 * @return the local date
+	 */
 	private LocalDate LocalDate(String data) {
 		return data == null ? null : LocalDate.parse(data);
 	}

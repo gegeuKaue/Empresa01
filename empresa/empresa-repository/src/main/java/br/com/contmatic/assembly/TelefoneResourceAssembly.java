@@ -5,8 +5,17 @@ import org.bson.Document;
 import br.com.contmatic.telefone.Telefone;
 import br.com.contmatic.telefone.TelefoneDDD;
 
+/**
+ * The Class TelefoneResourceAssembly.
+ */
 public class TelefoneResourceAssembly implements Assembly<Telefone, Document> {
 
+	/**
+	 * To resource.
+	 *
+	 * @param document the document
+	 * @return the telefone
+	 */
 	@Override
 	public Telefone toResource(Document document) {
 		if (document != null) {
@@ -18,6 +27,12 @@ public class TelefoneResourceAssembly implements Assembly<Telefone, Document> {
 		return null;
 	}
 
+	/**
+	 * To document.
+	 *
+	 * @param resource the resource
+	 * @return the document
+	 */
 	@Override
 	public Document toDocument(Telefone resource) {
 		if (resource != null) {

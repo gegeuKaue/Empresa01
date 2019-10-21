@@ -2,6 +2,7 @@ package br.com.contmatic.repository;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
@@ -212,7 +213,6 @@ public class RepositoryTest {
 		repository.salvar(empresa);
 
 		Empresa empresaBuscada = repository.selecionar(Arrays.asList("aaaaaaaaaaaaaaaaaaaaaaaaaaaa")).get(0);
-		System.out.println(empresa);
 		assertThat(empresaBuscada.toString(), containsString("null"));
 	}
 
@@ -224,10 +224,9 @@ public class RepositoryTest {
 		repository.salvar(empresa);
 
 		Empresa empresaBuscada = repository.selecionar(Arrays.asList("nome")).get(0);
-		System.out.println(empresa);
 		assertThat(empresaBuscada.getCnpj(), equalTo(empresa.getCnpj()));
 	}
-	
+
 	@Test
 	public void deve_retornar_os_funcionarios_da_empresa() throws IOException {
 		Repository repository = new Repository(database);
@@ -236,10 +235,9 @@ public class RepositoryTest {
 		repository.salvar(empresa);
 
 		Empresa empresaBuscada = repository.selecionar(Arrays.asList("funcionarios")).get(0);
-		System.out.println(empresaBuscada);
 		assertThat(empresaBuscada.getFuncionarios(), equalTo(empresa.getFuncionarios()));
 	}
-	
+
 	@Test
 	public void deve_retornar_os_enderecos_da_empresa() throws IOException {
 		Repository repository = new Repository(database);
@@ -250,5 +248,20 @@ public class RepositoryTest {
 		Empresa empresaBuscada = repository.selecionar(Arrays.asList("enderecos")).get(0);
 		System.out.println(empresaBuscada);
 		assertThat(empresaBuscada.getEnderecos(), equalTo(empresa.getEnderecos()));
+	}
+
+	@Test
+	public void deve_deletar_valores_aonde_nome_for_igual() throws IOException {
+		Repository repository = new Repository(database);
+		MongoCollection<Document> collection = database.getCollection("empresa");
+		List<Empresa> empresas = Arrays.asList(EmpresaEasyRandom.empresa(), EmpresaEasyRandom.empresa(),
+				EmpresaEasyRandom.empresa(), EmpresaEasyRandom.empresa());
+		empresas.get(0).setEmail("geovane@kaue.com");
+		for (Empresa empresa : empresas) {
+			repository.salvar(empresa);
+		}
+
+		repository.deletar(new Document("email", "geovane@kaue.com"));
+		assertThat((long)empresas.size() - 1, is(collection.estimatedDocumentCount()));
 	}
 }

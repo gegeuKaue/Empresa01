@@ -28,6 +28,8 @@ import br.com.contmatic.easy.random.EmpresaEasyRandom;
 import br.com.contmatic.easy.random.FuncionarioEasyRandom;
 import br.com.contmatic.easy.random.TelefoneEasyRandom;
 import br.com.contmatic.endereco.Endereco;
+import br.com.contmatic.groups.Post;
+import br.com.contmatic.groups.Put;
 import br.com.contmatic.telefone.Telefone;
 import br.com.contmatic.telefone.TelefoneDDD;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -590,8 +592,13 @@ public class EmpresaTest {
 	public boolean isValid(Empresa empresa, String mensagem) {
 		validator = factory.getValidator();
 		boolean valido = true;
-		Set<ConstraintViolation<Empresa>> restricoes = validator.validate(empresa);
+		Set<ConstraintViolation<Empresa>> restricoes = validator.validate(empresa, Post.class);
 		for (ConstraintViolation<Empresa> constraintViolation : restricoes)
+			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
+				valido = false;
+		
+		Set<ConstraintViolation<Empresa>> restricoes2 = validator.validate(empresa, Put.class);
+		for (ConstraintViolation<Empresa> constraintViolation : restricoes2)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
 

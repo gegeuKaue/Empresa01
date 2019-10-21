@@ -13,7 +13,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotBlank;
 
+import br.com.contmatic.groups.Post;
+import br.com.contmatic.groups.Put;
 import br.com.contmatic.regex.RegexType;
+
 
 /**
  * The Class Endereco.
@@ -28,17 +31,17 @@ public class Endereco {
 
 	/** The cidade. */
 	@Valid
-	@NotNull(message = "Os valores da cidade não pode ser nulo")
+	@NotNull(message = "Os valores da cidade não pode ser nulo", groups = { Put.class, Post.class })
 	private Cidade cidade;
 
 	/** The numero. */
-	@Min(value = 1, message = "O número não deve ser negativo.")
+	@Min(value = 1, message = "O número não deve ser negativo.", groups = { Put.class, Post.class })
 	private int numero;
 
 	/** The cep. */
-	@NotBlank(message = "O CEP não pode está vázio.")
-	@Pattern(regexp = RegexType.CEP, message = "Digite um cep valido")
-	@Size(min = 8, max = 8, message = "O CEP deve ter 8 digitos.")
+	@NotBlank(message = "O CEP não pode está vázio.", groups = { Put.class, Post.class })
+	@Pattern(regexp = RegexType.CEP, message = "Digite um cep valido", groups = { Put.class, Post.class })
+	@Size(min = 8, max = 8, message = "O CEP deve ter 8 digitos.", groups = { Put.class, Post.class })
 	private String cep;
 
 	/**
@@ -123,7 +126,7 @@ public class Endereco {
 			return false;
 		}
 		Endereco endereco = (Endereco) obj;
-		return new EqualsBuilder().append(this.cep, endereco.getCep()).append((int)this.numero, endereco.getNumero())
+		return new EqualsBuilder().append(this.cep, endereco.getCep()).append((int) this.numero, endereco.getNumero())
 				.isEquals();
 	}
 

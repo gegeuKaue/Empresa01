@@ -11,9 +11,13 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotBlank;
 
+import br.com.contmatic.groups.Post;
+import br.com.contmatic.groups.Put;
+
 /**
+ * The Class Telefone.
+ *
  * @author geovane.santoss
- * 
  */
 /**
  * The Class Telefone.
@@ -21,13 +25,13 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Telefone {
 
 	/** The ddd. */
-	@NotNull(message = "O ddd do telefone não pode ser vazio.")
+	@NotNull(message = "O ddd do telefone não pode ser vazio.", groups = { Put.class, Post.class })
 	private TelefoneDDD ddd;
 
 	/** The numero. */
-	@NotBlank(message = "O número do telefone não pode ser vazio.")
-	@Pattern(regexp = "9\\d+", message = "O número do telefone está invalido.")
-	@Size(min = 9, max = 9, message = "O número do telefone tem que ter 9 numeros")
+	@NotBlank(message = "O número do telefone não pode ser vazio.", groups = { Put.class, Post.class })
+	@Pattern(regexp = "9\\d+", message = "O número do telefone está invalido.", groups = { Put.class, Post.class })
+	@Size(min = 9, max = 9, message = "O número do telefone tem que ter 9 numeros", groups = { Put.class, Post.class })
 	private String numero;
 
 	/**

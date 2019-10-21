@@ -3,7 +3,10 @@ package br.com.contmatic.endereco;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+
 /**
+ * The Enum Estado.
+ *
  * @author geovane.santos
  */
 
@@ -114,6 +117,11 @@ public enum Estado {
 		return nomeEstado;
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);

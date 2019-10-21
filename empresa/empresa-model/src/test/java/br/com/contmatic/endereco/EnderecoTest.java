@@ -21,6 +21,8 @@ import com.google.code.beanmatchers.BeanMatchers;
 
 import br.com.contmatic.easy.random.CidadeEasyRandom;
 import br.com.contmatic.easy.random.EnderecoEasyRandom;
+import br.com.contmatic.groups.Post;
+import br.com.contmatic.groups.Put;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
@@ -143,8 +145,13 @@ public class EnderecoTest {
 	public boolean isValid(Endereco endereco, String mensagem) {
 		validator = factory.getValidator();
 		boolean valido = true;
-		Set<ConstraintViolation<Endereco>> restricoes = validator.validate(endereco);
+		Set<ConstraintViolation<Endereco>> restricoes = validator.validate(endereco, Post.class);
 		for (ConstraintViolation<Endereco> constraintViolation : restricoes)
+			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
+				valido = false;
+
+		Set<ConstraintViolation<Endereco>> restricoes2 = validator.validate(endereco, Put.class);
+		for (ConstraintViolation<Endereco> constraintViolation : restricoes2)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
 		return valido;

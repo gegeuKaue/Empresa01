@@ -9,8 +9,17 @@ import br.com.contmatic.endereco.Bairro;
 import br.com.contmatic.endereco.Cidade;
 import br.com.contmatic.endereco.Estado;
 
+/**
+ * The Class CidadeResourceAssembly.
+ */
 public class CidadeResourceAssembly implements Assembly<Cidade, Document> {
 
+	/**
+	 * To resource.
+	 *
+	 * @param document the document
+	 * @return the cidade
+	 */
 	@Override
 	public Cidade toResource(Document document) {
 		if (document != null) {
@@ -23,6 +32,12 @@ public class CidadeResourceAssembly implements Assembly<Cidade, Document> {
 		return null;
 	}
 
+	/**
+	 * To document.
+	 *
+	 * @param resource the resource
+	 * @return the document
+	 */
 	@Override
 	public Document toDocument(Cidade resource) {
 		if (resource != null) {
@@ -31,6 +46,12 @@ public class CidadeResourceAssembly implements Assembly<Cidade, Document> {
 		return null;
 	}
 
+	/**
+	 * To resource bairro.
+	 *
+	 * @param documents the documents
+	 * @return the list
+	 */
 	private List<Bairro> toResourceBairro(List<Document> documents) {
 		if (documents == null) {
 			return null;

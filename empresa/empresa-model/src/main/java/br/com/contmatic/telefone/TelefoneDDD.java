@@ -1,12 +1,14 @@
+/*
+ * 
+ */
 package br.com.contmatic.telefone;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * 
+ *
  * @author geovane.santos
- * 
  */
 /**
  * The Enum TelefoneDDD.

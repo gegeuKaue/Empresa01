@@ -62,6 +62,11 @@ public final class Conexao implements Closeable {
 		return database;
 	}
 
+	/**
+	 * Gets the mongo client.
+	 *
+	 * @return the mongo client
+	 */
 	public MongoClient getMongoClient() {
 		if (mongoClient == null) {
 			mongoClient = new MongoClient(HOST, PORT);

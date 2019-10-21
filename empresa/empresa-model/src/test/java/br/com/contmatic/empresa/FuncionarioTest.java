@@ -29,6 +29,8 @@ import com.google.code.beanmatchers.ValueGenerator;
 
 import br.com.contmatic.easy.random.FuncionarioEasyRandom;
 import br.com.contmatic.easy.random.TelefoneEasyRandom;
+import br.com.contmatic.groups.Post;
+import br.com.contmatic.groups.Put;
 import br.com.contmatic.telefone.Telefone;
 import br.com.contmatic.telefone.TelefoneDDD;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -461,10 +463,16 @@ public class FuncionarioTest {
 	public boolean isValid(Funcionario funcionario, String mensagem) {
 		validator = factory.getValidator();
 		boolean valido = true;
-		Set<ConstraintViolation<Funcionario>> restricoes = validator.validate(funcionario);
+		Set<ConstraintViolation<Funcionario>> restricoes = validator.validate(funcionario, Post.class);
 		for (ConstraintViolation<Funcionario> constraintViolation : restricoes)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
+		
+		Set<ConstraintViolation<Funcionario>> restricoes2 = validator.validate(funcionario, Put.class);
+		for (ConstraintViolation<Funcionario> constraintViolation : restricoes2)
+			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
+				valido = false;
+
 		return valido;
 	}
 

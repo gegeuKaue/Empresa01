@@ -12,8 +12,17 @@ import br.com.contmatic.empresa.Funcionario;
 import br.com.contmatic.endereco.Endereco;
 import br.com.contmatic.telefone.Telefone;
 
+/**
+ * The Class EmpresaResourceAssembly.
+ */
 public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 
+	/**
+	 * To resource.
+	 *
+	 * @param document the document
+	 * @return the empresa
+	 */
 	@Override
 	public Empresa toResource(Document document) {
 		if (document != null) {
@@ -30,6 +39,12 @@ public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 		return null;
 	}
 
+	/**
+	 * To document.
+	 *
+	 * @param resource the resource
+	 * @return the document
+	 */
 	@Override
 	public Document toDocument(Empresa resource) {
 		if (resource != null) {
@@ -38,6 +53,12 @@ public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 		return null;
 	}
 
+	/**
+	 * To resource enderecos.
+	 *
+	 * @param documents the documents
+	 * @return the sets the
+	 */
 	private Set<Endereco> toResourceEnderecos(List<Document> documents) {
 
 		if (documents == null) {
@@ -51,6 +72,12 @@ public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 		return resources;
 	}
 
+	/**
+	 * To resource funcionarios.
+	 *
+	 * @param documents the documents
+	 * @return the list
+	 */
 	private List<Funcionario> toResourceFuncionarios(List<Document> documents) {
 		if (documents == null) {
 			return null;
@@ -63,6 +90,12 @@ public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 		return resources;
 	}
 
+	/**
+	 * To resource telefones.
+	 *
+	 * @param documents the documents
+	 * @return the sets the
+	 */
 	private Set<Telefone> toResourceTelefones(List<Document> documents) {
 		if (documents == null) {
 			return null;

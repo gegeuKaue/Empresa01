@@ -14,6 +14,9 @@ public final class RegexType {
 	/** The Constant CEP. */
 	public static final String CEP = "\\d+";
 
+	/**
+	 * Instantiates a new regex type.
+	 */
 	private RegexType() {
 
 	}

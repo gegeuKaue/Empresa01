@@ -5,8 +5,17 @@ import org.bson.Document;
 import br.com.contmatic.endereco.Cidade;
 import br.com.contmatic.endereco.Endereco;
 
+/**
+ * The Class EnderecoResourceAssembly.
+ */
 public class EnderecoResourceAssembly implements Assembly<Endereco, Document> {
 
+	/**
+	 * To resource.
+	 *
+	 * @param document the document
+	 * @return the endereco
+	 */
 	@Override
 	public Endereco toResource(Document document) {
 		if (document != null) {
@@ -19,6 +28,12 @@ public class EnderecoResourceAssembly implements Assembly<Endereco, Document> {
 		return null;
 	}
 
+	/**
+	 * To document.
+	 *
+	 * @param resource the resource
+	 * @return the document
+	 */
 	@Override
 	public Document toDocument(Endereco resource) {
 		if (resource != null) {
@@ -27,6 +42,12 @@ public class EnderecoResourceAssembly implements Assembly<Endereco, Document> {
 		return null;
 	}
 
+	/**
+	 * To resource cidade.
+	 *
+	 * @param document the document
+	 * @return the cidade
+	 */
 	private Cidade toResourceCidade(Document document) {
 		if (document == null) {
 			return null;

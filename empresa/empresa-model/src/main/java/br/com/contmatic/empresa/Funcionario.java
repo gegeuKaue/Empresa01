@@ -20,8 +20,11 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 import br.com.caelum.stella.bean.validation.CPF;
+import br.com.contmatic.groups.Post;
+import br.com.contmatic.groups.Put;
 import br.com.contmatic.regex.RegexType;
 import br.com.contmatic.telefone.Telefone;
+
 
 /**
  * The Class Funcionario.
@@ -30,48 +33,57 @@ import br.com.contmatic.telefone.Telefone;
  */
 public class Funcionario {
 	/** The nome. */
-	@NotBlank(message = "O nome do funcionario não deve ser vázio.")
-	@Length(max = 500, message = "O nome máximo de funcionario é de {max} caracteres")
-	@Pattern(regexp = RegexType.NOME, message = "O nome do funcionário está incorreto")
+	@NotBlank(message = "O nome do funcionario não deve ser vázio.", groups = { Put.class, Post.class })
+	@Length(max = 500, message = "O nome máximo de funcionario é de {max} caracteres", groups = { Put.class,
+			Post.class })
+	@Pattern(regexp = RegexType.NOME, message = "O nome do funcionário está incorreto", groups = { Put.class,
+			Post.class })
 	private String nome;
 
 	/** The cargo. */
-	@NotBlank(message = "O cargo do funcionario não deve ser vázio.")
-	@Length(max = 500, message = "O cargo máximo de funcionario é de {max} caracteres")
+	@NotBlank(message = "O cargo do funcionario não deve ser vázio.", groups = { Put.class, Post.class })
+	@Length(max = 500, message = "O cargo máximo de funcionario é de {max} caracteres", groups = { Put.class,
+			Post.class })
 	private String cargo;
 
 	/** The idade. */
-	@Min(value = 1, message = "A idade do funcionario não pode ser negativa.")
+	@Min(value = 1, message = "A idade do funcionario não pode ser negativa.", groups = { Put.class, Post.class })
 	private Integer idade;
 
 	/** The entrada. */
-	@NotNull(message = "O horario de entrada funcionario não pode ser nulo.")
+	@NotNull(message = "O horario de entrada funcionario não pode ser nulo.", groups = { Put.class, Post.class })
 	private LocalTime entrada;
 
 	/** The saida. */
-	@NotNull(message = "O horario de saida funcionario não pode ser nulo.")
+	@NotNull(message = "O horario de saida funcionario não pode ser nulo.", groups = { Put.class, Post.class })
 	private LocalTime saida;
 
-	@NotNull(message = "A data de contratação do funcionario não deve ser nula")
-	@Past(message = "A data de contratação do funcionario não deve ser maior que a atual")
+	/** The data contratacao. */
+	@NotNull(message = "A data de contratação do funcionario não deve ser nula", groups = { Put.class, Post.class })
+	@Past(message = "A data de contratação do funcionario não deve ser maior que a atual", groups = { Put.class,
+			Post.class })
 	private LocalDate dataContratacao;
 
 	/** The cpf. */
-	@CPF(message = "O CPF do funcionario está inválido")
-	@NotBlank(message = "O cep do funcionario não pode ser nulo.")
+	@CPF(message = "O CPF do funcionario está inválido", groups = { Put.class, Post.class })
+	@NotBlank(message = "O cep do funcionario não pode ser nulo.", groups = { Put.class, Post.class })
 	private String cpf;
 
 	/** The telefone. */
 	@Valid
-	@NotNull(message = "O telefone do funcionario não pode ser nulo")
-	@Size.List({ @Size(min = 1, message = "A lista de endereço do funcionario não deve ser vazio."),
-			@Size(max = 500, message = "A lista de endereço do funcionario máxima é de {max}.") })
+	@NotNull(message = "O telefone do funcionario não pode ser nulo", groups = { Put.class, Post.class })
+	@Size.List({
+			@Size(min = 1, message = "A lista de endereço do funcionario não deve ser vazio.", groups = { Put.class,
+					Post.class }),
+			@Size(max = 500, message = "A lista de endereço do funcionario máxima é de {max}.", groups = { Put.class,
+					Post.class }) })
 	private Set<Telefone> telefones;
 
 	/** The email. */
-	@NotBlank(message = "O email não pode ser nulo")
-	@Email(message = "O email do funcionario está invalido.")
-	@Length(max = 500, message = "O e-mail do funcionario deve ter no máximo {max} caracteres")
+	@NotBlank(message = "O email não pode ser nulo", groups = { Put.class, Post.class })
+	@Email(message = "O email do funcionario está invalido.", groups = { Put.class, Post.class })
+	@Length(max = 500, message = "O e-mail do funcionario deve ter no máximo {max} caracteres", groups = { Put.class,
+			Post.class })
 	private String email;
 
 	/**

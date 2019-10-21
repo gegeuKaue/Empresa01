@@ -24,6 +24,8 @@ import org.junit.Test;
 import com.google.code.beanmatchers.BeanMatchers;
 
 import br.com.contmatic.easy.random.CidadeEasyRandom;
+import br.com.contmatic.groups.Post;
+import br.com.contmatic.groups.Put;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
@@ -163,10 +165,16 @@ public class CidadeTest {
 	public boolean isValid(Cidade cidade, String mensagem) {
 		validator = factory.getValidator();
 		boolean valido = true;
-		Set<ConstraintViolation<Cidade>> restricoes = validator.validate(cidade);
+		Set<ConstraintViolation<Cidade>> restricoes = validator.validate(cidade, Post.class);
 		for (ConstraintViolation<Cidade> constraintViolation : restricoes)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
+		
+		Set<ConstraintViolation<Cidade>> restricoes2 = validator.validate(cidade, Put.class);
+		for (ConstraintViolation<Cidade> constraintViolation : restricoes2)
+			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
+				valido = false;
+
 		return valido;
 	}
 }

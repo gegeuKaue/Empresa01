@@ -13,30 +13,44 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import br.com.contmatic.groups.Post;
+import br.com.contmatic.groups.Put;
+
 /**
  * The Class Cidade.
  */
 public class Cidade {
 
 	/** The nome. */
-	@NotBlank(message = "Nome da cidade não pode ser vazio.")
-	@Length(max = 500, message = "Nome da cidade não deve ser maior que {max}")
+	@NotBlank(message = "Nome da cidade não pode ser vazio.", groups = { Put.class, Post.class })
+	@Length(max = 500, message = "Nome da cidade não deve ser maior que {max}", groups = { Put.class, Post.class })
 	private String nome;
 
 	/** The estado. */
-	@NotNull(message = "Nome do estado não pode ser nulo.")
+	@NotNull(message = "Nome do estado não pode ser nulo.", groups = { Put.class, Post.class })
 	private Estado estado;
 
 	/** The bairro. */
-	@NotNull(message = "O Bairro da cidade não pode está vazio")
-	@Size.List({ @Size(min = 1, message = "O bairro da cidade não deve ser vazio"),
-			@Size(max = 500, message = "O bairro limite da bairro da cidade é de {max}") })
+	@NotNull(message = "O Bairro da cidade não pode está vazio", groups = { Put.class, Post.class })
+	@Size.List({ @Size(min = 1, message = "O bairro da cidade não deve ser vazio", groups = { Put.class, Post.class }),
+			@Size(max = 500, message = "O bairro limite da bairro da cidade é de {max}", groups = { Put.class,
+					Post.class }) })
 	private List<Bairro> bairro;
 
+	/**
+	 * Gets the bairro.
+	 *
+	 * @return the bairro
+	 */
 	public List<Bairro> getBairro() {
 		return bairro;
 	}
 
+	/**
+	 * Sets the bairro.
+	 *
+	 * @param bairro the new bairro
+	 */
 	public void setBairro(List<Bairro> bairro) {
 		this.bairro = bairro;
 	}

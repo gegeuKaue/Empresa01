@@ -19,8 +19,11 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.caelum.stella.bean.validation.CNPJ;
 import br.com.contmatic.endereco.Endereco;
+import br.com.contmatic.groups.Post;
+import br.com.contmatic.groups.Put;
 import br.com.contmatic.regex.RegexType;
 import br.com.contmatic.telefone.Telefone;
+
 
 /**
  * The Class Empresa.
@@ -32,47 +35,55 @@ import br.com.contmatic.telefone.Telefone;
 public class Empresa {
 
 	/** The nome. */
-	@NotBlank(message = "O nome da empresa não pode ser nulo.")
-	@Length(max = 100, message = "O nome da empresa deve ter {max} caracteres")
-	@Pattern(regexp = RegexType.NOME, message = "O nome da empresa está incorreto")
+	@NotBlank(message = "O nome da empresa não pode ser nulo.", groups = { Put.class, Post.class })
+	@Length(max = 100, message = "O nome da empresa deve ter {max} caracteres", groups = { Put.class, Post.class })
+	@Pattern(regexp = RegexType.NOME, message = "O nome da empresa está incorreto", groups = { Put.class, Post.class })
 	private String nome;
 
 	/** The email. */
-	@Email(message = "O email da empresa está inválido")
-	@NotBlank(message = "O email da empresa não pode ser nulo")
-	@Length(max = 500, message = "O e-mail da empresa deve ter no máximo {max} caracteres")
+	@Email(message = "O email da empresa está inválido", groups = { Put.class, Post.class })
+	@NotBlank(message = "O email da empresa não pode ser nulo", groups = { Put.class, Post.class })
+	@Length(max = 500, message = "O e-mail da empresa deve ter no máximo {max} caracteres", groups = { Put.class,
+			Post.class })
 	private String email;
 
 	/** The cnpj. */
 
-	@NotBlank(message = "O cnpj não pode ser nulo")
-	@CNPJ(message = "O CNPJ da empresa está invalido")
+	@NotBlank(message = "O cnpj não pode ser nulo", groups = { Put.class, Post.class })
+	@CNPJ(message = "O CNPJ da empresa está invalido", groups = { Put.class, Post.class })
 	private String cnpj;
 
 	/** The endereco. */
 	@Valid
-	@NotNull(message = "O endereço da empresa está vazio")
-	@Size.List({ @Size(min = 1, message = "A lista de endereço está vazia"),
-			@Size(max = 50, message = "A lista de endereço máxima é de {max}") })
+	@NotNull(message = "O endereço da empresa está vazio", groups = { Put.class, Post.class })
+	@Size.List({ @Size(min = 1, message = "A lista de endereço está vazia", groups = { Put.class, Post.class }),
+			@Size(max = 50, message = "A lista de endereço máxima é de {max}", groups = { Put.class, Post.class }) })
 	private Set<Endereco> enderecos;
 
 	/** The telefones. */
 	@Valid
-	@NotNull(message = "O telefone da empresa não pode ser nulo")
-	@Size.List({ @Size(min = 1, message = "A lista de telefone da empresa não deve ser vazio."),
-			@Size(max = 500, message = "A lista de telefone da empresa máxima é de {max}.") })
+	@NotNull(message = "O telefone da empresa não pode ser nulo", groups = { Put.class, Post.class })
+	@Size.List({
+			@Size(min = 1, message = "A lista de telefone da empresa não deve ser vazio.", groups = { Put.class,
+					Post.class }),
+			@Size(max = 500, message = "A lista de telefone da empresa máxima é de {max}.", groups = { Put.class,
+					Post.class }) })
 	private Set<Telefone> telefones;
 
 	/** The lista funcionario. */
 	@Valid
-	@NotNull(message = "Os funcionários da empresa está nulo.")
-	@Size.List({ @Size(max = 1000, message = "O número máximo de funcionario da empresa é de {max}"),
-			@Size(min = 1, message = "Não tem nenhum funcionario cadastrado na empresa.") })
+	@NotNull(message = "Os funcionários da empresa está nulo.", groups = { Put.class, Post.class })
+	@Size.List({
+			@Size(max = 1000, message = "O número máximo de funcionario da empresa é de {max}", groups = { Put.class,
+					Post.class }),
+			@Size(min = 1, message = "Não tem nenhum funcionario cadastrado na empresa.", groups = { Put.class,
+					Post.class }) })
 	private List<Funcionario> funcionarios;
 
 	/** The url. */
-	@NotBlank(message = "A url do site ada empresa não pode ser vazio.")
-	@Pattern(regexp = RegexType.URL, message = "A url do site da empresa está invalida.")
+	@NotBlank(message = "A url do site ada empresa não pode ser vazio.", groups = { Put.class, Post.class })
+	@Pattern(regexp = RegexType.URL, message = "A url do site da empresa está invalida.", groups = { Put.class,
+			Post.class })
 	private String url;
 
 	/**
