@@ -17,7 +17,7 @@ public class TelefoneDDDTest {
 	@Test
 	public void deve_retornar_um_TelefoneDDD_com_nome_por_extenso() {
 		TelefoneDDD ddd = TelefoneDDD.valueOf("DDD11");
-		assertThat(ddd.getRegiao(), is("são paulo | região metropolitana de são paulo.."));
+		assertThat(ddd.getRegiao(), is("são paulo | região metropolitana de são paulo."));
 	}
 
 	@Test

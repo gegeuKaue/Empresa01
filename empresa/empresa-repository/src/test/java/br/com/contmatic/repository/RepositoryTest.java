@@ -190,19 +190,22 @@ public class RepositoryTest {
 		Empresa empresaBuscada = repository.selecionar(Arrays.asList("nome", "email")).get(0);
 		assertThat(empresaBuscada.toString(), containsString("null"));
 	}
-	
+
 	@Test
-	public void deve_retornar_campo_da_empresa_mesmo_caso_nao_exista_ao_selecionar_escolhendo_campo() throws IOException {
+	public void deve_retornar_campo_da_empresa_mesmo_caso_nao_exista_ao_selecionar_escolhendo_campo()
+			throws IOException {
 		Repository repository = new Repository(database);
 
 		Empresa empresa = EmpresaEasyRandom.empresa();
 		repository.salvar(empresa);
 
-		Empresa empresaBuscada = repository.selecionar(Arrays.asList("nome", "email","aaaaaaaaaaaaaaaaaaaaaaaaaaaa")).get(0);
+		Empresa empresaBuscada = repository.selecionar(Arrays.asList("nome", "email", "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"))
+				.get(0);
 		assertThat(empresaBuscada.toString(), containsString("null"));
 	}
+
 	@Test
-	public void deve_retornar_campo_da_empresa_mesmo_caso_nao_esssssssssxista_ao_selecionar_escolhendo_campo() throws IOException {
+	public void deve_retornar_a_empresa_mesmo_nao_exista_valores() throws IOException {
 		Repository repository = new Repository(database);
 
 		Empresa empresa = EmpresaEasyRandom.empresa();
@@ -211,5 +214,41 @@ public class RepositoryTest {
 		Empresa empresaBuscada = repository.selecionar(Arrays.asList("aaaaaaaaaaaaaaaaaaaaaaaaaaaa")).get(0);
 		System.out.println(empresa);
 		assertThat(empresaBuscada.toString(), containsString("null"));
+	}
+
+	@Test
+	public void deve_retornar_a_empresa_com_o_cpnj_escolhendo_os_campos_da_classe() throws IOException {
+		Repository repository = new Repository(database);
+
+		Empresa empresa = EmpresaEasyRandom.empresa();
+		repository.salvar(empresa);
+
+		Empresa empresaBuscada = repository.selecionar(Arrays.asList("nome")).get(0);
+		System.out.println(empresa);
+		assertThat(empresaBuscada.getCnpj(), equalTo(empresa.getCnpj()));
+	}
+	
+	@Test
+	public void deve_retornar_os_funcionarios_da_empresa() throws IOException {
+		Repository repository = new Repository(database);
+
+		Empresa empresa = EmpresaEasyRandom.empresa();
+		repository.salvar(empresa);
+
+		Empresa empresaBuscada = repository.selecionar(Arrays.asList("funcionarios")).get(0);
+		System.out.println(empresaBuscada);
+		assertThat(empresaBuscada.getFuncionarios(), equalTo(empresa.getFuncionarios()));
+	}
+	
+	@Test
+	public void deve_retornar_os_enderecos_da_empresa() throws IOException {
+		Repository repository = new Repository(database);
+
+		Empresa empresa = EmpresaEasyRandom.empresa();
+		repository.salvar(empresa);
+
+		Empresa empresaBuscada = repository.selecionar(Arrays.asList("enderecos")).get(0);
+		System.out.println(empresaBuscada);
+		assertThat(empresaBuscada.getEnderecos(), equalTo(empresa.getEnderecos()));
 	}
 }
