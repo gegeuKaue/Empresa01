@@ -25,7 +25,6 @@ import br.com.contmatic.groups.Put;
 import br.com.contmatic.regex.RegexType;
 import br.com.contmatic.telefone.Telefone;
 
-
 /**
  * The Class Funcionario.
  *

@@ -1,0 +1,11 @@
+br\com\contmatic\endereco\Bairro.class
+br\com\contmatic\groups\Put.class
+br\com\contmatic\empresa\Funcionario.class
+br\com\contmatic\telefone\TelefoneDDD.class
+br\com\contmatic\endereco\Estado.class
+br\com\contmatic\endereco\Cidade.class
+br\com\contmatic\telefone\Telefone.class
+br\com\contmatic\empresa\Empresa.class
+br\com\contmatic\endereco\Endereco.class
+br\com\contmatic\regex\RegexType.class
+br\com\contmatic\groups\Post.class

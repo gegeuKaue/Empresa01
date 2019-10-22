@@ -11,15 +11,6 @@ import com.mongodb.client.MongoDatabase;
  */
 public final class Conexao implements Closeable {
 
-	/** The Constant HOST. */
-	private static final String HOST = "localhost";
-
-	/** The Constant PORT. */
-	private static final int PORT = 27017;
-
-	/** The Constant DB_NAME. */
-	private static final String DB_NAME = "empresa";
-
 	/** The mongo client. */
 	private static MongoClient mongoClient;
 
@@ -57,7 +48,7 @@ public final class Conexao implements Closeable {
 	public MongoDatabase getDatabase() {
 		if (database == null) {
 			mongoClient = getMongoClient();
-			database = mongoClient.getDatabase(DB_NAME);
+			database = mongoClient.getDatabase(MongoConf.DB_NAME);
 		}
 		return database;
 	}
@@ -69,7 +60,7 @@ public final class Conexao implements Closeable {
 	 */
 	public MongoClient getMongoClient() {
 		if (mongoClient == null) {
-			mongoClient = new MongoClient(HOST, PORT);
+			mongoClient = new MongoClient(MongoConf.HOST, MongoConf.PORT);
 
 		}
 		return mongoClient;

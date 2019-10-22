@@ -19,7 +19,7 @@ import br.com.contmatic.empresa.Empresa;
  * The Class Repository.
  */
 public class Repository {
-
+	
 	/** The database. */
 	private MongoDatabase database;
 
@@ -46,6 +46,10 @@ public class Repository {
 
 	}
 
+	public void alterar(Document query, Document where) {
+		database.getCollection("empresa").updateMany(where, new Document("$set", query));
+	}
+
 	/**
 	 * Alterar.
 	 *
@@ -60,6 +64,15 @@ public class Repository {
 		whereQuery.append("_id", empresa.getCnpj());
 
 		database.getCollection("empresa").updateOne(whereQuery, new Document("$set", document));
+	}
+
+	/**
+	 * Deletar.
+	 *
+	 * @param document the document
+	 */
+	public void deletar(Document document) {
+		database.getCollection("empresa").deleteMany(document);
 	}
 
 	/**
@@ -92,6 +105,22 @@ public class Repository {
 	/**
 	 * Selecionar.
 	 *
+	 * @return the list
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public List<Empresa> selecionar() throws IOException {
+		FindIterable<Document> find = database.getCollection("empresa").find();
+		List<Empresa> empresas = new ArrayList<Empresa>();
+		EmpresaResourceAssembly empresaResourceAssembly = new EmpresaResourceAssembly();
+		for (Document document : find) {
+			empresas.add(empresaResourceAssembly.toResource(document));
+		}
+		return empresas;
+	}
+
+	/**
+	 * Selecionar.
+	 *
 	 * @param campos the campos
 	 * @return the list
 	 * @throws IOException Signals that an I/O exception has occurred.
@@ -110,15 +139,6 @@ public class Repository {
 			empresas.add(empresaResourceAssembly.toResource(document));
 		}
 		return empresas;
-	}
-
-	/**
-	 * Deletar.
-	 *
-	 * @param document the document
-	 */
-	public void deletar(Document document) {
-		database.getCollection("empresa").deleteMany(document);
 	}
 
 }

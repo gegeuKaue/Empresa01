@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: br.com.contmatic.repository.RepositoryTest
 -------------------------------------------------------------------------------
-Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.91 sec
+Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.911 sec
