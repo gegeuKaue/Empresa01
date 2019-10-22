@@ -19,7 +19,7 @@ import br.com.contmatic.empresa.Empresa;
  * The Class Repository.
  */
 public class Repository {
-	
+	private static final String NAME_COLLECTION = "empresa";
 	/** The database. */
 	private MongoDatabase database;
 
@@ -42,12 +42,12 @@ public class Repository {
 		Document document = Document.parse(empresa.toString());
 		document.remove("cnpj");
 		document.append("_id", empresa.getCnpj());
-		database.getCollection("empresa").insertOne(document);
+		database.getCollection(NAME_COLLECTION).insertOne(document);
 
 	}
 
 	public void alterar(Document query, Document where) {
-		database.getCollection("empresa").updateMany(where, new Document("$set", query));
+		database.getCollection(NAME_COLLECTION).updateMany(where, new Document("$set", query));
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class Repository {
 		BasicDBObject whereQuery = new BasicDBObject();
 		whereQuery.append("_id", empresa.getCnpj());
 
-		database.getCollection("empresa").updateOne(whereQuery, new Document("$set", document));
+		database.getCollection(NAME_COLLECTION).updateOne(whereQuery, new Document("$set", document));
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class Repository {
 	 * @param document the document
 	 */
 	public void deletar(Document document) {
-		database.getCollection("empresa").deleteMany(document);
+		database.getCollection(NAME_COLLECTION).deleteMany(document);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class Repository {
 		Document document = new Document("_id", empresa.getCnpj());
 		document.remove("cnpj");
 		document.append("_id", empresa.getCnpj());
-		database.getCollection("empresa").deleteOne(new Document("_id", empresa.getCnpj()));
+		database.getCollection(NAME_COLLECTION).deleteOne(new Document("_id", empresa.getCnpj()));
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class Repository {
 	public Empresa selecionar(String cnpj) throws IOException {
 		BasicDBObject whereQuery = new BasicDBObject();
 		whereQuery.append("_id", cnpj);
-		FindIterable<Document> find = database.getCollection("empresa").find(whereQuery);
+		FindIterable<Document> find = database.getCollection(NAME_COLLECTION).find(whereQuery);
 		return new EmpresaResourceAssembly().toResource(find.first());
 	}
 
@@ -109,7 +109,7 @@ public class Repository {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public List<Empresa> selecionar() throws IOException {
-		FindIterable<Document> find = database.getCollection("empresa").find();
+		FindIterable<Document> find = database.getCollection(NAME_COLLECTION).find();
 		List<Empresa> empresas = new ArrayList<Empresa>();
 		EmpresaResourceAssembly empresaResourceAssembly = new EmpresaResourceAssembly();
 		for (Document document : find) {
@@ -126,14 +126,17 @@ public class Repository {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public List<Empresa> selecionar(List<String> campos) throws IOException {
+		List<Empresa> empresas = null;
 		if (campos == null) {
-			return null;
+			return empresas;
 		}
 		if (campos.isEmpty()) {
-			return null;
+			return empresas;
 		}
-		FindIterable<Document> find = database.getCollection("empresa").find().projection(include(campos)).limit(50);
-		List<Empresa> empresas = new ArrayList<Empresa>();
+		empresas = new ArrayList<Empresa>();
+		FindIterable<Document> find = database.getCollection(NAME_COLLECTION).find().projection(include(campos))
+				.limit(50);
+
 		EmpresaResourceAssembly empresaResourceAssembly = new EmpresaResourceAssembly();
 		for (Document document : find) {
 			empresas.add(empresaResourceAssembly.toResource(document));

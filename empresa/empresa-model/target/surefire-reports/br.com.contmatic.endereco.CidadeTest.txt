@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: br.com.contmatic.endereco.CidadeTest
 -------------------------------------------------------------------------------
-Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.182 sec
+Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.234 sec

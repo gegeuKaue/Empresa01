@@ -60,11 +60,11 @@ public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 	 * @return the sets the
 	 */
 	private Set<Endereco> toResourceEnderecos(List<Document> documents) {
-
+		Set<Endereco> resources = null;
 		if (documents == null) {
-			return null;
+			return resources;
 		}
-		Set<Endereco> resources = new HashSet<Endereco>();
+		resources = new HashSet<Endereco>();
 		EnderecoResourceAssembly resource = new EnderecoResourceAssembly();
 		for (Document document : documents) {
 			resources.add(resource.toResource(document));
@@ -79,10 +79,11 @@ public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 	 * @return the list
 	 */
 	private List<Funcionario> toResourceFuncionarios(List<Document> documents) {
+		List<Funcionario> resources = null;
 		if (documents == null) {
-			return null;
+			return resources;
 		}
-		List<Funcionario> resources = new ArrayList<Funcionario>();
+		resources = new ArrayList<Funcionario>();
 		FuncionarioResourceAssembly resource = new FuncionarioResourceAssembly();
 		for (Document document : documents) {
 			resources.add(resource.toResource(document));
@@ -97,15 +98,16 @@ public class EmpresaResourceAssembly implements Assembly<Empresa, Document> {
 	 * @return the sets the
 	 */
 	private Set<Telefone> toResourceTelefones(List<Document> documents) {
+		Set<Telefone> telefones = null;
 		if (documents == null) {
-			return null;
+			return telefones;
 		}
-		TelefoneResourceAssembly assembly = new  TelefoneResourceAssembly();
-		Set<Telefone> telefones = new HashSet<Telefone>();
+		TelefoneResourceAssembly assembly = new TelefoneResourceAssembly();
+		telefones = new HashSet<Telefone>();
 		for (Document document : documents) {
 			telefones.add(assembly.toResource(document));
 		}
-		
+
 		return telefones;
 	}
 

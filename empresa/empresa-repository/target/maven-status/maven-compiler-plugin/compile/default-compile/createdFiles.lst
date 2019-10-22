@@ -1,9 +1,10 @@
+br\com\contmatic\assembly\EnderecoResourceAssembly.class
+br\com\contmatic\assembly\EmpresaResourceAssembly.class
+br\com\contmatic\repository\Repository.class
+br\com\contmatic\util\Conexao.class
 br\com\contmatic\assembly\CidadeResourceAssembly.class
 br\com\contmatic\assembly\TelefoneResourceAssembly.class
 br\com\contmatic\assembly\BairroResourceAssembly.class
-br\com\contmatic\assembly\EnderecoResourceAssembly.class
+br\com\contmatic\util\MongoConf.class
 br\com\contmatic\assembly\Assembly.class
-br\com\contmatic\assembly\EmpresaResourceAssembly.class
 br\com\contmatic\assembly\FuncionarioResourceAssembly.class
-br\com\contmatic\repository\Repository.class
-br\com\contmatic\util\Conexao.class
