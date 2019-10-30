@@ -3,6 +3,7 @@ package br.com.contmatic.empresa;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCodeFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
+import static nl.jqno.equalsverifier.Warning.NONFINAL_FIELDS;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
@@ -33,7 +34,6 @@ import br.com.contmatic.groups.Put;
 import br.com.contmatic.telefone.Telefone;
 import br.com.contmatic.telefone.TelefoneDDD;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 
 public class EmpresaTest {
 
@@ -64,7 +64,7 @@ public class EmpresaTest {
 
 	@Test
 	public void deve_respeitar_o_equals_da_empresa() {
-		EqualsVerifier.forClass(CLASSE).withRedefinedSuperclass().usingGetClass().suppress(Warning.NONFINAL_FIELDS)
+		EqualsVerifier.forClass(CLASSE).withRedefinedSuperclass().usingGetClass().suppress(NONFINAL_FIELDS)
 				.withOnlyTheseFields("cnpj").verify();
 	}
 

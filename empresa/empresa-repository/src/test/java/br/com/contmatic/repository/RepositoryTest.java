@@ -72,7 +72,6 @@ public class RepositoryTest {
 
 	@After
 	public void tearDown() {
-		database = mongo.getDatabase("empresa");
 		database.drop();
 	}
 
